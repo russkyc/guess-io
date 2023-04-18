@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7CC43920-DECD-46C0-A349-59110C3C22C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1412D5E3-25A4-4C31-BD27-E26FFEF69915}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuessIO.Application", "GuessIO.Application\GuessIO.Application.csproj", "{E4908D01-4E42-4AEC-A6AD-91B6C8BCC6DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E4908D01-4E42-4AEC-A6AD-91B6C8BCC6DF} = {7CC43920-DECD-46C0-A349-59110C3C22C1}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4908D01-4E42-4AEC-A6AD-91B6C8BCC6DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4908D01-4E42-4AEC-A6AD-91B6C8BCC6DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4908D01-4E42-4AEC-A6AD-91B6C8BCC6DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4908D01-4E42-4AEC-A6AD-91B6C8BCC6DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
