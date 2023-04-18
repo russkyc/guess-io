@@ -22,7 +22,7 @@
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<Border Width="65" Height="65" CornerRadius="10" Background="DarkSeaGreen" x:Name="LetterCard">
+						<Border Width="65" Height="65" CornerRadius="10" Background="#4e24e3" x:Name="LetterCard">
 							<Label Foreground="White" Content="{Binding Letter, NotifyOnTargetUpdated=True}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontWeight="Medium" />
 						</Border>
 						<DataTemplate.Triggers>
@@ -38,7 +38,7 @@
 								</BeginStoryboard>
 							</EventTrigger>
 							<DataTrigger Binding="{Binding Letter}" Value="?">
-								<Setter Property="Background" TargetName="LetterCard" Value="{DynamicResource bg-100}" />
+								<Setter Property="Background" TargetName="LetterCard" Value="{StaticResource bg-100}" />
 							</DataTrigger>
 							<MultiDataTrigger>
 								<MultiDataTrigger.Conditions>
@@ -81,7 +81,7 @@
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
-			<russkyc:ModernTextBox x:Name="AnswerBox" HelperText="Press ENTER to guess and TAB to generate a new word" BorderThickness="2.3" CornerRadius="10" FocusedBorderBrush="DarkSeaGreen" Width="350" TextAlignment="Center" FontSize="20" FontWeight="Medium" Padding="7" Text="{Binding GuessWord, UpdateSourceTrigger=PropertyChanged}">
+			<russkyc:ModernTextBox x:Name="AnswerBox" HelperText="Press ENTER to guess and TAB to generate a new word" BorderThickness="2.3" CornerRadius="10" FocusedBorderBrush="#4e24e3" Width="350" TextAlignment="Center" FontSize="20" FontWeight="Medium" Padding="7" Text="{Binding GuessWord, UpdateSourceTrigger=PropertyChanged}">
 				<russkyc:ModernTextBox.InputBindings>
 					<KeyBinding Gesture="Enter" 
                                 Command="{Binding GuessCommand}" />
@@ -107,7 +107,7 @@
 											                AutoReverse="True"
 											                RepeatBehavior="2x"
 											                FillBehavior="Stop"
-											                Storyboard.TargetProperty="(FocusedBorderBrush).(SolidColorBrush.Color)"/>
+											                Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"/>
 										</Storyboard>
 									</BeginStoryboard>
 								</MultiDataTrigger.EnterActions>
@@ -125,7 +125,7 @@
 											                AutoReverse="True"
 											                FillBehavior="Stop"
 											                RepeatBehavior="1x"
-											                Storyboard.TargetProperty="(FocusedBorderBrush).(SolidColorBrush.Color)"/>
+											                Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"/>
 										</Storyboard>
 									</BeginStoryboard>
 								</MultiDataTrigger.EnterActions>
