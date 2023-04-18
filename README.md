@@ -2,7 +2,7 @@
 
   ## Guess.IO
 
-A small word guessing game made for fun using C# and WPF and [Russkyc.ModernControls.WPF](https://github.com/russkyc/modern-controls-wpf)
+A small word guessing game made for fun using C#, WPF and [Russkyc.ModernControls.WPF](https://github.com/russkyc/modern-controls-wpf)
 
 ![](https://raw.githubusercontent.com/russkyc/guess-io/master/GuessIO.Application/Resources/guess-io-preview.png)
 
