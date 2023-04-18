@@ -25,9 +25,6 @@ namespace org.russkyc.guessio.ViewModels;
 public partial class GuessViewModel : ObservableObject
 {
     [ObservableProperty]
-    private bool? _guessed;
-
-    [ObservableProperty]
     private WordInfo? _word;
 
     [ObservableProperty]
@@ -46,13 +43,22 @@ public partial class GuessViewModel : ObservableObject
         Generate();
     }
 
-    [RelayCommand]
     private void Generate()
     {
-        Word = WordsCollection?[new Random().Next(WordsCollection.Count)];
+        do
+        {
+            Word = WordsCollection?[new Random().Next(WordsCollection.Count)];
+        } while (Word!.Guessed);
         GuessCollection?.Clear();
         ClearFields();
         Word?.Hide();
+    }
+
+    [RelayCommand]
+    private void Skip()
+    {
+        Word?.Skip();
+        Generate();
     }
 
     [RelayCommand]
@@ -60,18 +66,18 @@ public partial class GuessViewModel : ObservableObject
     {
         if (GuessWord != null && Word != null && Word.Match(GuessWord))
         {
-            Guessed = true;
-            Word.UnHide();
             Generate();
+            Word.Guessed = true;
         }
         else
         {
             if (GuessWord?.Length > 2)
             {
+                Word!.Guessed = true;
+                Word!.Guessed = false;
                 GuessCollection?.Add(new GuessInfo(GuessWord));
             }
 
-            Guessed = false;
             ClearFields();
         }
     }

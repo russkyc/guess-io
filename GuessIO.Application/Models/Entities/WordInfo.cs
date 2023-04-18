@@ -30,9 +30,16 @@ public partial class WordInfo : ObservableObject
     [ObservableProperty]
     private string? _word;
 
+    [ObservableProperty]
+    private bool _guessed;
+
+    [ObservableProperty]
+    private bool _hidden;
+
     public WordInfo(string word)
     {
         Word = word;
+        Guessed = false;
         Letters = new ObservableCollection<LetterInfo>();
         foreach (var letter in word.ToCharArray())
         {
@@ -48,7 +55,7 @@ public partial class WordInfo : ObservableObject
         }
     }
 
-    public void UnHide()
+    public void Unhide()
     {
         foreach (LetterInfo letter in Letters!)
         {
@@ -58,6 +65,24 @@ public partial class WordInfo : ObservableObject
 
     public bool Match(string word)
     {
-        return Word!.Equals(word, StringComparison.OrdinalIgnoreCase);
+        if (Word!.Equals(word, StringComparison.OrdinalIgnoreCase))
+        {
+            Unhide();
+            Hidden = false;
+            Guessed = true;
+            return Guessed;
+        }
+        else
+        {
+            Hidden = true;
+            Guessed = false;
+            return Guessed;
+        }
+    }
+
+    public void Skip()
+    {
+        Guessed = false;
+        Hide();
     }
 }
