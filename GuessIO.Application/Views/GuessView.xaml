@@ -42,7 +42,8 @@
 							</DataTrigger>
 							<MultiDataTrigger>
 								<MultiDataTrigger.Conditions>
-									<Condition Binding="{Binding DataContext.Guessed, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType=russkyc:ModernWindow}}" Value="True"/>
+									<Condition Binding="{Binding DataContext.Word.Guessed, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType=russkyc:ModernWindow}}" Value="True"/>
+									<Condition Binding="{Binding DataContext.Word.Hidden, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType=russkyc:ModernWindow}}" Value="False"/>
 								</MultiDataTrigger.Conditions>
 								<MultiDataTrigger.EnterActions>
 									<BeginStoryboard>
@@ -61,7 +62,7 @@
 							</MultiDataTrigger>
 							<MultiDataTrigger>
 								<MultiDataTrigger.Conditions>
-									<Condition Binding="{Binding .DataContext.Guessed, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=russkyc:ModernWindow}, UpdateSourceTrigger=PropertyChanged}" Value="False" />
+									<Condition Binding="{Binding .DataContext.Word.Guessed, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=russkyc:ModernWindow}, UpdateSourceTrigger=PropertyChanged}" Value="False" />
 									<Condition Binding="{Binding Letter}" Value="?" />
 								</MultiDataTrigger.Conditions>
 								<MultiDataTrigger.EnterActions>
@@ -85,31 +86,36 @@
 					<KeyBinding Gesture="Enter" 
                                 Command="{Binding GuessCommand}" />
 					<KeyBinding Gesture="Tab" 
-                                Command="{Binding GenerateCommand}" />
+                                Command="{Binding SkipCommand}" />
 				</russkyc:ModernTextBox.InputBindings>
 				<russkyc:ModernTextBox.Style>
 					<Style TargetType="{x:Type russkyc:ModernTextBox}" BasedOn="{StaticResource {x:Type russkyc:ModernTextBox}}">
 						<Style.Triggers>
-							<DataTrigger Binding="{Binding .DataContext.Guessed, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=russkyc:ModernWindow}, UpdateSourceTrigger=PropertyChanged}" Value="False">
-								<DataTrigger.EnterActions>
+							<MultiDataTrigger>
+								<MultiDataTrigger.Conditions>
+									<Condition Binding="{Binding .DataContext.Word.Guessed, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=russkyc:ModernWindow}, UpdateSourceTrigger=PropertyChanged}" Value="False" />
+									<Condition Binding="{Binding DataContext.Word.Hidden, RelativeSource={RelativeSource FindAncestor, AncestorType=russkyc:ModernWindow}, UpdateSourceTrigger=PropertyChanged}" Value="True"/>
+								</MultiDataTrigger.Conditions>
+								<MultiDataTrigger.EnterActions>
 									<BeginStoryboard>
 										<Storyboard TargetProperty="Margin" >
 											<ThicknessAnimation  To="13,0,0,0" Duration="0:0:0.05"
-                                                                 AutoReverse="True" RepeatBehavior="2x"
-                                                                 FillBehavior="Stop"/>
+											                     AutoReverse="True" RepeatBehavior="2x"
+											                     FillBehavior="Stop"/>
 											<ColorAnimation To="#FF3249" 
-                                                            Duration="0:0:0.08" 
-                                                            AutoReverse="True"
-                                                            RepeatBehavior="2x"
-                                                            FillBehavior="Stop"
-                                                            Storyboard.TargetProperty="(FocusedBorderBrush).(SolidColorBrush.Color)"/>
+											                Duration="0:0:0.08" 
+											                AutoReverse="True"
+											                RepeatBehavior="2x"
+											                FillBehavior="Stop"
+											                Storyboard.TargetProperty="(FocusedBorderBrush).(SolidColorBrush.Color)"/>
 										</Storyboard>
 									</BeginStoryboard>
-								</DataTrigger.EnterActions>
-							</DataTrigger>
+								</MultiDataTrigger.EnterActions>
+							</MultiDataTrigger>
 							<MultiDataTrigger>
 								<MultiDataTrigger.Conditions>
-									<Condition Binding="{Binding DataContext.Guessed, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType=russkyc:ModernWindow}}" Value="True"/>
+									<Condition Binding="{Binding DataContext.Word.Guessed, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType=russkyc:ModernWindow}}" Value="True"/>
+									<Condition Binding="{Binding DataContext.Word.Hidden, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType=russkyc:ModernWindow}}" Value="False"/>
 								</MultiDataTrigger.Conditions>
 								<MultiDataTrigger.EnterActions>
 									<BeginStoryboard>
