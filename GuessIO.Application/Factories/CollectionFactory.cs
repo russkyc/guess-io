@@ -24,11 +24,11 @@ namespace org.russkyc.guessio.Factories;
 
 public static class CollectionFactory
 {
-    public static ObservableCollection<WordInfo> CreateWordCollection(string datasetPath)
+    public static ObservableCollection<WordInfoViewModel> CreateWordCollection(string datasetPath)
     {
-        ObservableCollection<WordInfo> words = new ObservableCollection<WordInfo>();
+        ObservableCollection<WordInfoViewModel> words = new ObservableCollection<WordInfoViewModel>();
         foreach (var word in datasetPath.StreamListLines()
-                     .Select(word => new WordInfo(word)))
+                     .Select(word => new WordInfoViewModel(word)))
         {
             words.Add(word);
         }

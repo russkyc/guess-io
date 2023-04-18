@@ -20,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace org.russkyc.guessio.Models.Entities;
+namespace org.russkyc.guessio.ViewModels;
 
-public partial class WordInfo : ObservableObject
+public partial class WordInfoViewModel : ObservableObject
 {
     [ObservableProperty]
     private ObservableCollection<LetterInfo>? _letters;
@@ -36,7 +36,7 @@ public partial class WordInfo : ObservableObject
     [ObservableProperty]
     private bool _hidden;
 
-    public WordInfo(string word)
+    public WordInfoViewModel(string word)
     {
         Word = word;
         Guessed = false;

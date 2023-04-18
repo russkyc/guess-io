@@ -25,7 +25,7 @@ namespace org.russkyc.guessio.ViewModels;
 public partial class GuessViewModel : ObservableObject
 {
     [ObservableProperty]
-    private WordInfo? _word;
+    private WordInfoViewModel? _word;
 
     [ObservableProperty]
     private string? _guessWord;
@@ -34,9 +34,9 @@ public partial class GuessViewModel : ObservableObject
     private ObservableCollection<GuessInfo>? _guessCollection;
 
     [ObservableProperty]
-    private ObservableCollection<WordInfo>? _wordsCollection;
+    private ObservableCollection<WordInfoViewModel>? _wordsCollection;
 
-    public GuessViewModel(ObservableCollection<WordInfo> words, ObservableCollection<GuessInfo> guesses)
+    public GuessViewModel(ObservableCollection<WordInfoViewModel> words, ObservableCollection<GuessInfo> guesses)
     {
         WordsCollection = words;
         GuessCollection = guesses;
