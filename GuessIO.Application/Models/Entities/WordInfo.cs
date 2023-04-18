@@ -20,46 +20,44 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
-using System.Linq;
-using System.Text;
+namespace org.russkyc.guessio.Models.Entities;
 
-namespace org.russkyc.guessio.Models;
-
-public class WordInfo
+public partial class WordInfo : ObservableObject
 {
+    [ObservableProperty]
+    private ObservableCollection<LetterInfo>? _letters;
+
+    [ObservableProperty]
+    private string? _word;
+
     public WordInfo(string word)
     {
         Word = word;
-    }
-
-    public string Word { get; }
-
-    public string ObfuscatedWord
-    {
-        get
+        Letters = new ObservableCollection<LetterInfo>();
+        foreach (var letter in word.ToCharArray())
         {
-            var builder = new StringBuilder { Capacity = Word.Length };
-
-            do
-            {
-                builder.Clear();
-                Word.ToList()
-                    .ForEach(letter => builder.Append(Hide ? "?" : letter.ToString().ToUpper()));
-            } while (
-                builder.ToString().ToList().Where(c => c != '?').ToList().Count < (Word.Length / 2)
-            );
-
-            return builder.ToString();
+            Letters.Add(new LetterInfo(letter));
         }
     }
 
-    private bool Hide
+    public void Hide()
     {
-        get
+        foreach (LetterInfo letter in Letters!)
         {
-            var random = new Random();
-            return random.NextDouble() >= 0.5;
+            letter.Hide(new Random().NextDouble() > 0.5);
         }
+    }
+
+    public void UnHide()
+    {
+        foreach (LetterInfo letter in Letters!)
+        {
+            letter.Hide(false);
+        }
+    }
+
+    public bool Match(string word)
+    {
+        return Word!.Equals(word, StringComparison.OrdinalIgnoreCase);
     }
 }
