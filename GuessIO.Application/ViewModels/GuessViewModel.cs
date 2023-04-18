@@ -20,27 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using org.russkyc.guessio.Models;
-using Russkyc.AttachedUtilities.FileStreamExtensions;
-
 namespace org.russkyc.guessio.ViewModels;
 
 public partial class GuessViewModel : ObservableObject
 {
-    private static readonly string _datasetPath =
-        @$"{AppDomain.CurrentDomain.BaseDirectory}GuessWords.txt";
-    private static readonly Random _random = new Random();
-
     [ObservableProperty]
     private bool? _guessed;
-
-    [ObservableProperty]
-    private bool? _correct;
 
     [ObservableProperty]
     private WordInfo? _word;
@@ -49,59 +34,35 @@ public partial class GuessViewModel : ObservableObject
     private string? _guessWord;
 
     [ObservableProperty]
-    private ObservableCollection<LetterInfo>? _letters;
-
-    [ObservableProperty]
     private ObservableCollection<GuessInfo>? _guessCollection;
 
     [ObservableProperty]
     private ObservableCollection<WordInfo>? _wordsCollection;
 
-    public GuessViewModel()
+    public GuessViewModel(ObservableCollection<WordInfo> words, ObservableCollection<GuessInfo> guesses)
     {
-        WordsCollection = new ObservableCollection<WordInfo>();
-        GuessCollection = new ObservableCollection<GuessInfo>();
-        Letters = new ObservableCollection<LetterInfo>();
-        Initialize();
+        WordsCollection = words;
+        GuessCollection = guesses;
         Generate();
-    }
-
-    private void Initialize()
-    {
-        var words = _datasetPath.StreamListLines().Select(w => new WordInfo(w));
-        foreach (var word in words)
-        {
-            WordsCollection?.Add(word);
-        }
     }
 
     [RelayCommand]
     private void Generate()
     {
-        Word = WordsCollection?[_random.Next(WordsCollection.Count)];
-        Letters?.Clear();
-        foreach (var letter in Word!.ObfuscatedWord)
-        {
-            Letters?.Add(new LetterInfo(letter));
-        }
-        GuessWord = "";
-        Guessed = true;
+        Word = WordsCollection?[new Random().Next(WordsCollection.Count)];
         GuessCollection?.Clear();
-        Correct = false;
+        ClearFields();
+        Word?.Hide();
     }
 
     [RelayCommand]
     private void Guess()
     {
-        if (string.Equals(GuessWord, Word?.Word, StringComparison.OrdinalIgnoreCase))
+        if (GuessWord != null && Word != null && Word.Match(GuessWord))
         {
-            Letters?.Clear();
-            foreach (var letter in Word!.ObfuscatedWord)
-            {
-                Letters?.Add(new LetterInfo(letter));
-            }
+            Guessed = true;
+            Word.UnHide();
             Generate();
-            Correct = true;
         }
         else
         {
@@ -111,9 +72,12 @@ public partial class GuessViewModel : ObservableObject
             }
 
             Guessed = false;
-            GuessWord = "";
-            Guessed = true;
-            Correct = false;
+            ClearFields();
         }
+    }
+
+    private void ClearFields()
+    {
+        GuessWord = "";
     }
 }
