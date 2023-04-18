@@ -3,10 +3,11 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:russkyc="clr-namespace:org.russkyc.moderncontrols;assembly=Russkyc.ModernControls.WPF"
 	WindowStartupLocation="CenterScreen"
+	Icon="/Resources/guess_io_multi.ico"
 	MinHeight="550" MinWidth="750"
 	TitlebarBackground="{DynamicResource bg-000}"
 	Height="550" Width="750"
-	Title="Guess.io" >
+	Title="Guess.io - Guess the Word!" >
 	<Grid Background="{DynamicResource bg-000}">
 		<StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
 			<Label Foreground="{DynamicResource fg-000}" FontSize="25" FontWeight="Medium" HorizontalAlignment="Center" Content="Guess the Word"></Label>
