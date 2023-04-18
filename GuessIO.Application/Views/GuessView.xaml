@@ -4,6 +4,7 @@
 	xmlns:russkyc="clr-namespace:org.russkyc.moderncontrols;assembly=Russkyc.ModernControls.WPF"
 	WindowStartupLocation="CenterScreen"
 	MinHeight="550" MinWidth="750"
+	TitlebarBackground="{DynamicResource bg-000}"
 	Height="550" Width="750"
 	Title="Guess.io" >
 	<Grid Background="{DynamicResource bg-000}">
