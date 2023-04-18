@@ -23,7 +23,6 @@ namespace org.russkyc.guessio.Views;
 
 public partial class GuessView
 {
-    // View Constructor
     public GuessView()
     {
         InitializeComponent();
