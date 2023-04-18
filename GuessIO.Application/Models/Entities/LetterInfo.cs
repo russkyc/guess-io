@@ -20,14 +20,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace org.russkyc.guessio.Models;
+namespace org.russkyc.guessio.Models.Entities;
 
 public class LetterInfo
 {
-    public string Letter { get; }
+    private string? _letter;
+    private bool _hidden;
+
+    public string? Letter
+    {
+        get => _hidden ? "?" : _letter;
+        set => _letter = value;
+    }
 
     public LetterInfo(char letter)
     {
-        Letter = letter.ToString();
+        Letter = letter.ToString()
+            .ToUpper();
+
+    }
+    
+    public void Hide(bool value)
+    {
+        _hidden = value;
     }
 }
