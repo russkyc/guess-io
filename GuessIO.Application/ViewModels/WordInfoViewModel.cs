@@ -53,7 +53,11 @@ public partial class WordInfoViewModel : ObservableObject
     {
         foreach (LetterInfo letter in Letters!)
         {
-            letter.Hide(new Random().NextDouble() > 0.5);
+            var specialchars = "!?-=_".ToCharArray();
+            if (!specialchars.Contains(letter.Letter[0]))
+            {
+                letter.Hide(new Random().NextDouble() > 0.5);
+            }
         }
     }
 
