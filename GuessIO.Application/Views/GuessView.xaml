@@ -42,6 +42,9 @@
 							<DataTrigger Binding="{Binding Letter}" Value="?">
 								<Setter Property="Background" TargetName="LetterCard" Value="{StaticResource bg-100}" />
 							</DataTrigger>
+							<DataTrigger Binding="{Binding Letter}" Value=" ">
+								<Setter Property="Background" TargetName="LetterCard" Value="{StaticResource bg-000}" />
+							</DataTrigger>
 							<MultiDataTrigger>
 								<MultiDataTrigger.Conditions>
 									<Condition Binding="{Binding DataContext.Word.Guessed, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType=russkyc:ModernWindow}}" Value="True"/>
