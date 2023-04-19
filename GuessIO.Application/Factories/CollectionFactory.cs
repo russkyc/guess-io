@@ -39,7 +39,7 @@ public static class CollectionFactory
                 words.Add(word);
             }
         }
-        catch (FileNotFoundException fnfe)
+        catch (FileNotFoundException)
         {
             datasetPath.StreamCreate();
         }

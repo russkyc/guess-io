@@ -80,20 +80,15 @@ public partial class GuessViewModel : ObservableObject
     [RelayCommand]
     private void Guess()
     {
-        if (GuessWord != null && Word != null && Word.Match(GuessWord))
+        if (Word!.Match(GuessWord!))
         {
             Generate();
             Word.Guessed = true;
-        }
-        else
+        } else if (GuessWord?.Length > 2)
         {
-            if (GuessWord?.Length > 2)
-            {
-                Word!.Guessed = true;
-                Word!.Guessed = false;
-                GuessCollection?.Add(new GuessInfo(GuessWord));
-            }
-
+            Word!.Guessed = true;
+            Word!.Guessed = false;
+            GuessCollection?.Add(new GuessInfo(GuessWord));
             ClearFields();
         }
     }
