@@ -10,7 +10,7 @@
 	Title="Guess.io - Guess the Word!" >
 	<Grid Background="{DynamicResource bg-000}">
 		<StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-			<Label Foreground="{DynamicResource fg-000}" FontSize="25" FontWeight="Medium" HorizontalAlignment="Center" Content="Guess the Word"></Label>
+			<Label Foreground="{DynamicResource fg-000}" FontSize="25" FontWeight="Medium" HorizontalAlignment="Center" Content="{Binding PrompText, UpdateSourceTrigger=PropertyChanged}"></Label>
 			<ItemsControl ItemsSource="{Binding Word.Letters}" HorizontalAlignment="Stretch" Margin="80,20,80,20">
 				<ItemsControl.ItemContainerStyle>
 					<Style>
@@ -43,7 +43,7 @@
 								<Setter Property="Background" TargetName="LetterCard" Value="{StaticResource bg-100}" />
 							</DataTrigger>
 							<DataTrigger Binding="{Binding Letter}" Value=" ">
-								<Setter Property="Background" TargetName="LetterCard" Value="{StaticResource bg-000}" />
+								<Setter Property="Visibility" TargetName="LetterCard" Value="Hidden" />
 							</DataTrigger>
 							<MultiDataTrigger>
 								<MultiDataTrigger.Conditions>
@@ -86,7 +86,7 @@
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
-			<russkyc:ModernTextBox x:Name="AnswerBox" HelperText="Press ENTER to guess and TAB to generate a new word" BorderThickness="2.3" CornerRadius="10" FocusedBorderBrush="#4e24e3" Width="350" TextAlignment="Center" FontSize="20" FontWeight="Medium" Padding="7" Text="{Binding GuessWord, UpdateSourceTrigger=PropertyChanged}">
+			<russkyc:ModernTextBox x:Name="AnswerBox" HelperText="{Binding HelperText, UpdateSourceTrigger=PropertyChanged}" BorderThickness="2.3" CornerRadius="10" FocusedBorderBrush="#4e24e3" Width="350" TextAlignment="Center" FontSize="20" FontWeight="Medium" Padding="7" Text="{Binding GuessWord, UpdateSourceTrigger=PropertyChanged}">
 				<russkyc:ModernTextBox.InputBindings>
 					<KeyBinding Gesture="Enter" 
                                 Command="{Binding GuessCommand}" />

@@ -20,18 +20,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.IO;
+
 namespace org.russkyc.guessio.Factories;
 
 public static class CollectionFactory
 {
     public static ObservableCollection<WordInfoViewModel> CreateWordCollection(string datasetPath)
     {
+        
         ObservableCollection<WordInfoViewModel> words = new ObservableCollection<WordInfoViewModel>();
-        foreach (var word in datasetPath.StreamListLines()
-                     .Select(word => new WordInfoViewModel(word)))
+
+        try
         {
-            words.Add(word);
+            foreach (var word in datasetPath.StreamListLines()
+                         .Select(word => new WordInfoViewModel(word)))
+            {
+                words.Add(word);
+            }
         }
+        catch (FileNotFoundException fnfe)
+        {
+            datasetPath.StreamCreate();
+        }
+        
         return words;
     }
 

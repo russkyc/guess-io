@@ -31,6 +31,12 @@ public partial class GuessViewModel : ObservableObject
     private string? _guessWord;
 
     [ObservableProperty]
+    private string? _prompText;
+
+    [ObservableProperty]
+    private string? _helperText;
+
+    [ObservableProperty]
     private ObservableCollection<GuessInfo>? _guessCollection;
 
     [ObservableProperty]
@@ -45,13 +51,23 @@ public partial class GuessViewModel : ObservableObject
 
     private void Generate()
     {
-        do
+        var words = WordsCollection?.Where(word => !word.Guessed).ToList();
+
+        if (words!.Count > 0)
         {
-            Word = WordsCollection?[new Random().Next(WordsCollection.Count)];
-        } while (Word!.Guessed);
+            PrompText = "Guess the Word:";
+            HelperText = "Press ENTER to guess and TAB to generate a new word";
+            Word = words[new Random().Next(words.Count)];
+            Word?.Hide();
+        }
+        else
+        {
+            PrompText = "No Words to Guess";
+            HelperText = "Add Words to GuessWords.txt in order to play.";
+            Word = new WordInfoViewModel("");
+        }
         GuessCollection?.Clear();
         ClearFields();
-        Word?.Hide();
     }
 
     [RelayCommand]
