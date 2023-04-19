@@ -20,6 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Globalization;
+
 namespace org.russkyc.guessio.ViewModels;
 
 public partial class WordInfoViewModel : ObservableObject
@@ -65,7 +67,8 @@ public partial class WordInfoViewModel : ObservableObject
 
     public bool Match(string word)
     {
-        if (Word!.Equals(word, StringComparison.OrdinalIgnoreCase))
+        if (string.Compare(Word, word, CultureInfo.CurrentCulture, 
+                CompareOptions.IgnoreCase | CompareOptions.IgnoreSymbols) == 0)
         {
             Unhide();
             Hidden = false;

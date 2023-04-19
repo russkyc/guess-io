@@ -29,7 +29,7 @@ public class LetterInfo
 
     public string? Letter
     {
-        get => _hidden ? "?" : _letter;
+        get => _hidden ? _letter!.Equals(" ") ? _letter : "?" : _letter;
         set => _letter = value;
     }
 
